@@ -1,0 +1,396 @@
+import random
+#Declaración de variables
+bombo1=["Rusia","Alemania","Brasil","Portugal","Argentina","Belgica","Polonia","Francia"]
+bombo2=["España","Peru","Suiza","Inglaterra","Colombia","Mexico","Uruguay","Croacia"]
+bombo3=["Dinamarca","Islandia","CostaRica","Suecia","Tunez","Egipto","Senegal","Iran"]
+bombo4=["Serbia","Nigeria","Australia","Japon","Marruecos","Panama","Corea","Arabia"]
+cont1=["Europa","Europa","América","Europa","América","Europa","Europa","Europa"]
+cont2=["Europa","América","Europa","Europa","América","América","América","Europa"]
+cont3=["Europa","Europa","América","Europa","África","África","África","Asia"]
+cont4=["Europa","África","Asia","Asia","África","América","Asia","Asia"]
+GA=[]
+GB=[]
+GC=[]
+GD=[]
+GE=[]
+GF=[]
+GG=[]
+GH=[]
+paises=["Alemania","Arabia","Argentina","Australia","Belgica","Brasil","Colombia","Corea","CostaRica","Croacia","Dinamarca","Egipto","España","Francia","Inglaterra","Iran","Islandia","Japon","Marruecos","Mexico","Nigeria","Panama","Peru","Polonia","Portugal","Rusia","Senegal","Serbia","Suecia","Suiza","Tunez","Uruguay"]
+acro=["Ale","Ara","Arg","Aus","Bel","Bra","Col","Cor","Cos","Cro","Din","Egi","Esp","Fra","Ing","Ira","Isl","Jap","Mar","Mex","Nig","Pan","Per","Pol","Por","Rus","Sen","Ser","Sue","Sui","Tun","Uru"]
+prob=["Alemania",0,0.27,0.6,0.1,0.5,0.04,0.34,0.12,0.26,0.24,0.22,0.23,0.99,0.44,0.02,0.43,0.6,0.19,0.54,0.25,0.35,0.35,0,0.35,0.62,0.17,0.69,0.62,0.88,0.52,0.49,0.46,
+"Arabia",0,0,0.66,0.29,0.93,0.19,0.91,0.36,0.59,0.45,0.88,0.25,0.18,0.01,0.19,0.73,0.65,0.01,0.82,0.7,0.77,0.54,0.05,0.68,0.87,0.77,0.16,0.47,0.34,0.73,0.53,0.6,
+"Argentina",0,0,0,0.99,0.01,0.35,0.54,0.4,0.51,0.39,0.13,0.02,0.02,0.05,0.62,0.5,0.53,0.94,0.07,0.02,0.62,0.85,0.33,0.16,0.21,0.66,0.81,0.93,0.2,0.21,0.67,0.67,
+"Australia",0,0,0,0,0.16,0.44,0.02,0.84,0.41,0.86,0.37,0.85,0.13,0.97,0.42,0.87,0.58,0.78,0.86,0.5,0.01,0.86,0.39,0.66,0.61,0.6,0.22,0.1,0.35,0.46,0.1,0.09,
+"Belgica",0,0,0,0,0,0.34,1,0.39,0.48,0.23,0.38,0.17,0.93,0.71,0.4,0.56,0.05,0.17,0.27,0.77,0.63,0.3,0.48,0.79,0.94,0.91,0.63,0.31,0.93,0.75,0.17,0.47,
+"Brasil",0,0,0,0,0,0,0.44,0.56,0.33,0.64,0.39,0.63,0.6,0.7,0.83,0.99,0.96,0.73,0.21,0.13,0.32,0.56,0.98,0.01,0.42,0.65,0.59,0.52,0.65,0.62,0.41,0.35,
+"Colombia",0,0,0,0,0,0,0,0.3,0.85,0.8,0.01,0.22,0.68,0.61,0.52,0.42,0.37,0.47,0.25,0.34,0.72,0.91,0.07,0.63,0.24,0.63,0.59,0.28,0.19,0.07,0.27,0.05,
+"Corea",0,0,0,0,0,0,0,0,0.66,0.68,0.77,0.38,0.53,0.55,0.24,0.86,0.47,0.68,0.74,0.04,0.55,0.96,0.64,0.49,0.07,0.86,0.41,0.43,0.3,0.52,0.85,0.76,
+"CostaRica",0,0,0,0,0,0,0,0,0,0.81,0.71,0.32,0.66,0.19,0.71,0.97,0.69,0.64,0.5,0.47,0.84,0.95,0.41,0.96,0.56,0.44,0.3,0.65,0.53,0.77,0.83,0.25,
+"Croacia",0,0,0,0,0,0,0,0,0,0,0.9,0.14,0.17,0.52,0.27,0.22,0.84,0.65,0.72,0.16,0.5,0.4,0.73,0.88,0.77,0.21,0.39,0.89,0.17,0.34,0.43,0.73,
+"Dinamarca",0,0,0,0,0,0,0,0,0,0,0,0.34,0.12,0.03,0.4,0.13,0.34,0.71,1,0.41,0.8,0.64,0.5,0.58,0.75,0.52,0.84,0.83,0.25,0.47,0.84,0.89,
+"Egipto",0,0,0,0,0,0,0,0,0,0,0,0,0.47,0.52,0.15,0.29,0.13,0.76,0.64,0.11,0.3,0.45,0.16,0.07,0.22,0.05,0.46,0.61,0.35,0.44,0.32,0.96,
+"España",0,0,0,0,0,0,0,0,0,0,0,0,0,0.72,0.13,0.24,0.11,0.74,0.2,0.47,0.62,0.79,0.21,0.27,0.2,0.04,0.39,0.73,0.1,0.94,0.59,0.04,
+"Francia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.24,0.12,0.58,0.06,0.27,0.64,0.88,0.67,0.24,0.71,0.76,0.63,0.47,0.27,0.67,0.04,0.13,0.69,
+"Inglaterra",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.83,0,0.66,0.65,0.24,0.62,0.8,0.04,0.57,0.97,0.53,0.79,0.77,0.74,0.07,0.66,0.7,
+"Iran",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.72,0.04,0.15,0.91,0.7,0.9,0.89,0.07,0.95,0.68,0.37,0.7,0.72,0.51,0.85,0.41,
+"Islandia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.83,0.74,0.6,0.54,0.19,0.84,0.76,0.28,0.21,0.16,0.55,0.33,0.93,0.36,0.98,
+"Japon",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.41,0.23,0.45,0.89,0.84,0.96,0.84,0.9,0.84,0.04,0.75,0.26,0.4,0.31,
+"Marruecos",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.19,0.08,0.53,0.67,0.46,0.04,0.11,0.32,0.8,0.82,0.06,0.96,0.43,
+"Mexico",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.13,0.82,0.66,0.87,0.3,0.59,0.5,0.03,0.77,1,0.83,0.46,
+"Nigeria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.57,0.67,0.34,0.24,0.92,0.48,0.35,0.55,0.72,0.2,0.5,
+"Panama",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.14,0.08,0.71,0.94,0.64,0.49,0.11,0.46,0.42,0.08,
+"Peru",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.1,0.87,0.76,0.37,0.51,0.68,0.33,0.2,0.08,
+"Polonia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.13,0.96,0.78,0.1,0.74,0.35,0.24,0.35,
+"Portugal",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.72,0.26,0.83,0.85,0.81,0.33,0.1,
+"Rusia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.23,0.79,0.71,0,0.63,0.51,
+"Senegal",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.45,0.6,0.1,0.29,0.77,
+"Serbia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.25,0.2,0.35,0,
+"Suecia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.39,0.65,0.18,
+"Suiza",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.98,0.11,
+"Tunez",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.43,
+"Uruguay",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+puntos=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+octavos=[]
+cuartos=[]
+semifinales=[]
+tercerpuesto=[]
+final=[]
+ganador=""
+tercero=""
+#Funciones
+def Clasificatorias(pais1,pais2):
+    if pais1<pais2:
+        arriba=pais2
+        costado=pais1
+    else:
+        costado=pais2
+        arriba=pais1
+    a=paises.index(arriba)
+    e=prob.index(costado)
+    f=e+a+1
+    if prob[f]<0.50:
+        puntos[paises.index(arriba)]+=3
+    elif prob[f]>0.50:
+        puntos[paises.index(costado)]+=3
+    elif prob[f]==0.50:
+        puntos[paises.index(arriba)]+=1
+        puntos[paises.index(costado)]+=1
+
+def octavos1(pa1,pa2,pa3,pa4,pu1,pu2,pu3,pu4):
+    if pu1>=pu2 and pu1>=pu3 and pu1>=pu4:
+        octavos.append(pa1)
+        if pu2>=pu3 and pu2>=pu4:
+            octavos.append(pa2)
+        elif pu3>=pu4 and pu3>=pu2:
+            octavos.append(pa3)
+        elif pu4>=pu2 and pu4>=pu3:
+            octavos.append(pa4)
+    elif  pu2>=pu1 and pu2>=pu3 and pu2>=pu4:
+        octavos.append(pa2)
+        if pu1>=pu3 and pu1>=pu4:
+            octavos.append(pa1)
+        elif pu3>=pu4 and pu3>=pu1:
+            octavos.append(pa3)
+        elif pu4>=pu1 and pu4>=pu3:
+            octavos.append(pa4)
+    elif pu3>=pu1 and pu3>=pu2 and pu3>=pu4:
+        octavos.append(pa3)
+        if pu2>=pu1 and pu2>=pu4:
+            octavos.append(pa2)
+        elif pu1>=pu4 and pu1>=pu2:
+            octavos.append(pa1)
+        elif pu4>=pu2 and pu4>=pu1:
+            octavos.append(pa4)
+    elif  pu4>=pu2 and pu4>=pu3 and pu4>=pu1:
+        octavos.append(pa4)
+        if pu2>=pu3 and pu2>=pu1:
+            octavos.append(pa2)
+        elif pu3>=pu1 and pu3>=pu2:
+            octavos.append(pa3)
+        elif pu1>=pu2 and pu1>=pu3:
+            octavos.append(pa1)
+def octavos2(pais1,pais2):
+    if pais1<pais2:
+        arriba=pais2
+        costado=pais1
+    else:
+        costado=pais2
+        arriba=pais1
+    a=paises.index(arriba)
+    e=prob.index(costado)
+    f=e+a+1
+    if prob[f]<0.50:
+        cuartos.append(paises[paises.index(arriba)])
+        return paises[paises.index(arriba)]
+    elif prob[f]>0.50:
+        cuartos.append(paises[paises.index(costado)])
+        return paises[paises.index(costado)]
+    elif prob[f]==0.50:
+        cuartos.append(paises[paises.index(arriba)])
+        return paises[paises.index(arriba)]
+def cuartos1(pais1,pais2):
+    if pais1<pais2:
+        arriba=pais2
+        costado=pais1
+    else:
+        costado=pais2
+        arriba=pais1
+    a=paises.index(arriba)
+    e=prob.index(costado)
+    f=e+a+1
+    if prob[f]<0.50:
+        semifinales.append(paises[paises.index(arriba)])
+        return paises[paises.index(arriba)]
+    elif prob[f]>0.50:
+        semifinales.append(paises[paises.index(costado)])
+        return paises[paises.index(costado)]
+    elif prob[f]==0.50:
+        semifinales.append(paises[paises.index(arriba)])
+        return paises[paises.index(arriba)]
+def semifinales1(pais1,pais2):
+    if pais1<pais2:
+        arriba=pais2
+        costado=pais1
+    else:
+        costado=pais2
+        arriba=pais1
+    a=paises.index(arriba)
+    e=prob.index(costado)
+    f=e+a+1
+    if prob[f]<0.50:
+        final.append(paises[paises.index(arriba)])
+        tercerpuesto.append(paises[paises.index(costado)])
+        return paises[paises.index(arriba)]
+    elif prob[f]>0.50:
+        final.append(paises[paises.index(costado)])
+        tercerpuesto.append(paises[paises.index(arriba)])
+        return paises[paises.index(costado)]
+    elif prob[f]==0.50:
+        final.append(paises[paises.index(arriba)])
+        tercerpuesto.append(paises[paises.index(costado)])
+        return paises[paises.index(arriba)]
+def tercerpuesto1(pais1,pais2):
+    if pais1<pais2:
+        arriba=pais2
+        costado=pais1
+    else:
+        costado=pais2
+        arriba=pais1
+    a=paises.index(arriba)
+    e=prob.index(costado)
+    f=e+a+1
+    if prob[f]<0.50:
+        return paises[paises.index(arriba)]
+    elif prob[f]>0.50:
+        return paises[paises.index(costado)]
+    elif prob[f]==0.50:
+        return paises[paises.index(arriba)]
+def final1(pais1,pais2):
+    if pais1<pais2:
+        arriba=pais2
+        costado=pais1
+    else:
+        costado=pais2
+        arriba=pais1
+    a=paises.index(arriba)
+    e=prob.index(costado)
+    f=e+a+1
+    if prob[f]<0.50:
+        return paises[paises.index(arriba)]
+    elif prob[f]>0.50:
+        return paises[paises.index(costado)]
+    elif prob[f]==0.50:
+        return paises[paises.index(arriba)]
+#Inicio del programa
+print("World Cup Russia 2018")
+print(" ")
+print("Bombos")
+print(" ")
+print("Bombo 1:",end=" ")
+for i in range(len(bombo1)):
+    print( bombo1[i]+"("+(cont1[i])+")"," ",end= "")
+print(" ")
+print("Bombo 2:",end=" ")
+for i in range(len(bombo2)):
+    print(bombo2[i]+"("+(cont2[i])+")"," ",end= "")
+print(" ")
+print("Bombo 3:",end=" ")
+for i in range(len(bombo3)):
+    print(bombo3[i]+"("+(cont3[i])+")"," ",end= "")
+print(" ")
+print("Bombo 4:",end=" ")
+for i in range(len(bombo4)):
+    print(bombo4[i]+"("+(cont4[i])+")", " ",end= "")
+print(" ")
+print(" ")
+print("Grupos")
+print(" ")
+GA.append(bombo1.pop(random.randint(0,7)))
+GA.append(bombo2.pop(random.randint(0,7)))
+GA.append(bombo3.pop(random.randint(0,7)))
+GA.append(bombo4.pop(random.randint(0,7)))
+print("Grupo A: ", GA)
+GB.append(bombo1.pop(random.randint(0,6)))
+GB.append(bombo2.pop(random.randint(0,6)))
+GB.append(bombo3.pop(random.randint(0,6)))
+GB.append(bombo4.pop(random.randint(0,6)))
+print("Grupo B: ",GB)
+GC.append(bombo1.pop(random.randint(0,5)))
+GC.append(bombo2.pop(random.randint(0,5)))
+GC.append(bombo3.pop(random.randint(0,5)))
+GC.append(bombo4.pop(random.randint(0,5)))
+print("Grupo C: ",GC)
+GD.append(bombo1.pop(random.randint(0,4)))
+GD.append(bombo2.pop(random.randint(0,4)))
+GD.append(bombo3.pop(random.randint(0,4)))
+GD.append(bombo4.pop(random.randint(0,4)))
+print("Grupo D: ",GD)
+GE.append(bombo1.pop(random.randint(0,3)))
+GE.append(bombo2.pop(random.randint(0,3)))
+GE.append(bombo3.pop(random.randint(0,3)))
+GE.append(bombo4.pop(random.randint(0,3)))
+print("Grupo E: ",GE)
+GF.append(bombo1.pop(random.randint(0,2)))
+GF.append(bombo2.pop(random.randint(0,2)))
+GF.append(bombo3.pop(random.randint(0,2)))
+GF.append(bombo4.pop(random.randint(0,2)))
+print("Grupo F: ",GF)
+GG.append(bombo1.pop(random.randint(0,1)))
+GG.append(bombo2.pop(random.randint(0,1)))
+GG.append(bombo3.pop(random.randint(0,1)))
+GG.append(bombo4.pop(random.randint(0,1)))
+print("Grupo G: ",GG)
+GH.append(bombo1.pop(random.randint(0,0)))
+GH.append(bombo2.pop(random.randint(0,0)))
+GH.append(bombo3.pop(random.randint(0,0)))
+GH.append(bombo4.pop(random.randint(0,0)))
+print("Grupo H: ",GH)
+#Partidos
+Clasificatorias(GA[0],GA[1])
+Clasificatorias(GA[2],GA[3])
+Clasificatorias(GA[0],GA[2])
+Clasificatorias(GA[1],GA[3])
+Clasificatorias(GA[0],GA[3])
+Clasificatorias(GA[2],GA[1])
+Clasificatorias(GB[0],GB[1])
+Clasificatorias(GB[2],GB[3])
+Clasificatorias(GB[0],GB[2])
+Clasificatorias(GB[1],GB[3])
+Clasificatorias(GB[0],GB[3])
+Clasificatorias(GB[2],GB[1])
+Clasificatorias(GC[0],GC[1])
+Clasificatorias(GC[2],GC[3])
+Clasificatorias(GC[0],GC[2])
+Clasificatorias(GC[1],GC[3])
+Clasificatorias(GC[0],GC[3])
+Clasificatorias(GC[2],GC[1])
+Clasificatorias(GD[0],GD[1])
+Clasificatorias(GD[2],GD[3])
+Clasificatorias(GD[0],GD[2])
+Clasificatorias(GD[1],GD[3])
+Clasificatorias(GD[0],GD[3])
+Clasificatorias(GD[2],GD[1])
+Clasificatorias(GE[0],GE[1])
+Clasificatorias(GE[2],GE[3])
+Clasificatorias(GE[0],GE[2])
+Clasificatorias(GE[1],GE[3])
+Clasificatorias(GE[0],GE[3])
+Clasificatorias(GE[2],GE[1])
+Clasificatorias(GF[0],GF[1])
+Clasificatorias(GF[2],GF[3])
+Clasificatorias(GF[0],GF[2])
+Clasificatorias(GF[1],GF[3])
+Clasificatorias(GF[0],GF[3])
+Clasificatorias(GF[2],GF[1])
+Clasificatorias(GG[0],GG[1])
+Clasificatorias(GG[2],GG[3])
+Clasificatorias(GG[0],GG[2])
+Clasificatorias(GG[1],GG[3])
+Clasificatorias(GG[0],GG[3])
+Clasificatorias(GG[2],GG[1])
+Clasificatorias(GH[0],GH[1])
+Clasificatorias(GH[2],GH[3])
+Clasificatorias(GH[0],GH[2])
+Clasificatorias(GH[1],GH[3])
+Clasificatorias(GH[0],GH[3])
+Clasificatorias(GH[2],GH[1])
+#Puntos
+print(" ")
+print("Puntos")
+print(" ")
+print("Grupo A: ", GA[0], puntos[paises.index(GA[0])], "," , GA[1],puntos[paises.index(GA[1])], "," , GA[2],puntos[paises.index(GA[2])], "," , GA[3],puntos[paises.index(GA[3])])
+print("Grupo B: ", GB[0], puntos[paises.index(GB[0])], "," , GB[1],puntos[paises.index(GB[1])], "," , GB[2],puntos[paises.index(GB[2])], "," , GB[3],puntos[paises.index(GB[3])])
+print("Grupo C: ", GC[0], puntos[paises.index(GC[0])], "," , GC[1],puntos[paises.index(GC[1])], "," , GC[2],puntos[paises.index(GC[2])], "," , GC[3],puntos[paises.index(GC[3])])
+print("Grupo D: ", GD[0], puntos[paises.index(GD[0])], "," , GD[1],puntos[paises.index(GD[1])], "," , GD[2],puntos[paises.index(GD[2])], "," , GD[3],puntos[paises.index(GD[3])])
+print("Grupo E: ", GE[0], puntos[paises.index(GE[0])], "," , GE[1],puntos[paises.index(GE[1])], "," , GE[2],puntos[paises.index(GE[2])], "," , GE[3],puntos[paises.index(GE[3])])
+print("Grupo F: ", GF[0], puntos[paises.index(GF[0])], "," , GF[1],puntos[paises.index(GF[1])], "," , GF[2],puntos[paises.index(GF[2])], "," , GF[3],puntos[paises.index(GF[3])])
+print("Grupo G: ", GG[0], puntos[paises.index(GG[0])], "," , GG[1],puntos[paises.index(GG[1])], "," , GG[2],puntos[paises.index(GG[2])], "," , GG[3],puntos[paises.index(GG[3])])
+print("Grupo H: ", GH[0], puntos[paises.index(GH[0])], "," , GH[1],puntos[paises.index(GH[1])], "," , GH[2],puntos[paises.index(GH[2])], "," , GH[3],puntos[paises.index(GH[3])])
+octavos1(GA[0],GA[1],GA[2],GA[3], puntos[paises.index(GA[0])],puntos[paises.index(GA[1])],puntos[paises.index(GA[2])],puntos[paises.index(GA[3])])
+octavos1(GB[0],GB[1],GB[2],GB[3], puntos[paises.index(GB[0])],puntos[paises.index(GB[1])],puntos[paises.index(GB[2])],puntos[paises.index(GB[3])])
+octavos1(GC[0],GC[1],GC[2],GC[3], puntos[paises.index(GC[0])],puntos[paises.index(GC[1])],puntos[paises.index(GC[2])],puntos[paises.index(GC[3])])
+octavos1(GD[0],GD[1],GD[2],GD[3], puntos[paises.index(GD[0])],puntos[paises.index(GD[1])],puntos[paises.index(GD[2])],puntos[paises.index(GD[3])])
+octavos1(GE[0],GE[1],GE[2],GE[3], puntos[paises.index(GE[0])],puntos[paises.index(GE[1])],puntos[paises.index(GE[2])],puntos[paises.index(GE[3])])
+octavos1(GF[0],GF[1],GF[2],GF[3], puntos[paises.index(GF[0])],puntos[paises.index(GF[1])],puntos[paises.index(GF[2])],puntos[paises.index(GF[3])])
+octavos1(GG[0],GG[1],GG[2],GG[3], puntos[paises.index(GG[0])],puntos[paises.index(GG[1])],puntos[paises.index(GG[2])],puntos[paises.index(GG[3])])
+octavos1(GH[0],GH[1],GH[2],GH[3], puntos[paises.index(GH[0])],puntos[paises.index(GH[1])],puntos[paises.index(GH[2])],puntos[paises.index(GH[3])])
+print(" ")
+print("Octavos")
+print(" ")
+print("Partido 1: " ,octavos[0], "vs", octavos[3]+". GANADOR: ", octavos2(octavos[0],octavos[3]))
+print("Partido 2: " ,octavos[4], "vs", octavos[7]+". GANADOR: ", octavos2(octavos[4],octavos[7]))
+print("Partido 3: " ,octavos[8], "vs", octavos[11]+". GANADOR: ", octavos2(octavos[8],octavos[11]))
+print("Partido 4: " ,octavos[12], "vs", octavos[15]+". GANADOR: ", octavos2(octavos[12],octavos[15]))
+print("Partido 5: " ,octavos[2], "vs", octavos[1]+". GANADOR: ", octavos2(octavos[2],octavos[1]))
+print("Partido 6: " ,octavos[6], "vs", octavos[5]+". GANADOR: ", octavos2(octavos[6],octavos[5]))
+print("Partido 7: " ,octavos[10], "vs", octavos[9]+". GANADOR: ", octavos2(octavos[10],octavos[9]))
+print("Partido 8: " ,octavos[14], "vs", octavos[13]+". GANADOR: ", octavos2(octavos[14],octavos[13]))
+print(" ")
+print("Cuartos")
+print(" ")
+print("Partido 1: " ,cuartos[0], "vs", cuartos[-1]+". GANADOR: ", cuartos1(cuartos[0],cuartos[-1]))
+print("Partido 2: " ,cuartos[1], "vs", cuartos[-2]+". GANADOR: ", cuartos1(cuartos[1],cuartos[-2]))
+print("Partido 3: " ,cuartos[2], "vs", cuartos[-3]+". GANADOR: ", cuartos1(cuartos[2],cuartos[-3]))
+print("Partido 4: " ,cuartos[3], "vs", cuartos[-4]+". GANADOR: ", cuartos1(cuartos[3],cuartos[-4]))
+print(" ")
+print("Semifinales")
+print(" ")
+print("Partido 1: " ,semifinales[0], "vs", semifinales[-1]+". GANADOR: ", semifinales1(semifinales[0],semifinales[-1]))
+print("Partido 2: " ,semifinales[1], "vs", semifinales[-2]+". GANADOR: ", semifinales1(semifinales[1],semifinales[-2]))
+print(" ")
+print("Tercer puesto")
+print("Partido 1: " ,tercerpuesto[0], "vs", tercerpuesto[-1]+". GANADOR: ",tercerpuesto1(tercerpuesto[0],tercerpuesto[-1]))
+tercero=tercerpuesto1(tercerpuesto[0],tercerpuesto[-1])
+print(" ")
+print("Final")
+print(" ")
+print("Partido 1: " ,final[0], "vs", final[-1]+". GANADOR: ", final1(final[0],final[-1]))
+ganador= final1(final[0],final[-1])
+print(" ")
+print(" ")
+print(" ")
+print("             +-----------+")
+print("             |WORLD   CUP|")
+print(acro[paises.index(octavos[0])]+"+         |RUSSIA 2018|         +"+acro[paises.index(octavos[4])])
+print("   |-"+acro[paises.index(cuartos[0])]+"+    +-----------+    +"+acro[paises.index(cuartos[1])]+"-|")
+print(acro[paises.index(octavos[3])]+"+    |                     |    +"+acro[paises.index(octavos[7])])
+print("        |                     |")
+print("        +-"+acro[paises.index(semifinales[0])]+"+           +"+acro[paises.index(semifinales[1])]+"-+")
+print("        |    |           |    |")
+print(acro[paises.index(octavos[14])]+"+    |    |           |    |    +"+acro[paises.index(octavos[10])])
+print("   |-"+acro[paises.index(cuartos[7])]+"+    |           |    +"+acro[paises.index(cuartos[6])]+"-|")
+print(acro[paises.index(octavos[13])]+"+         |           |         +"+acro[paises.index(octavos[9])])
+print("             |           |")
+print("             +-"+acro[paises.index(final[0])]+"+ +"+acro[paises.index(final[1])]+"-+")
+print("             |    | |    |")
+print(acro[paises.index(octavos[12])]+"+         |    "+acro[paises.index(ganador)]+"    |         +"+acro[paises.index(octavos[8])])
+print("   |-"+acro[paises.index(cuartos[3])]+"+    |           |    +"+acro[paises.index(cuartos[2])]+"-|")
+print(acro[paises.index(octavos[15])]+"+    |    |           |    |    +"+acro[paises.index(octavos[11])])
+print("        |                     |")
+
+print("        +-"+acro[paises.index(semifinales[3])]+"+           +"+acro[paises.index(semifinales[2])]+"-+")
+print("        |                     |")
+print(acro[paises.index(octavos[2])]+"+    |                     |    +"+acro[paises.index(octavos[6])])
+print("   |-"+acro[paises.index(cuartos[4])]+"+         3er         +"+acro[paises.index(cuartos[5])]+"-|")
+print(acro[paises.index(octavos[1])]+"+              "+acro[paises.index(tercero)]+"              +"+acro[paises.index(octavos[5])])
